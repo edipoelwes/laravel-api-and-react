@@ -30,7 +30,7 @@ class ProductController extends Controller
   {
     $product = Product::create($request->all());
 
-    return response()->json([], 201);
+    return response()->json($product, 201);
   }
 
   /**

@@ -1,16 +1,20 @@
-import React from 'react';
+import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Nav = () => {
   return (
     <div className="container-fluid p-2 mb-5 bg-dark">
       <header className="container">
         <ul className="nav justify-content-center">
+        
           <li className="nav-item">
-            <a className="nav-link active text-white" href="teste">Listar</a>
+            <Link className="nav-link active text-white" to="/">Listar</Link>
           </li>
+
           <li className="nav-item">
-            <a className="nav-link text-white" href="teste">Criar</a>
+            <Link className="nav-link text-white" to="/forms">Criar</Link>
           </li>
+         
         </ul>
       </header>
     </div>

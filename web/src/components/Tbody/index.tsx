@@ -1,5 +1,5 @@
 import React from 'react';
-import {money_br} from '../../utils/functions'
+import {money_br} from '../../utils/utils'
 
 import {IProduct} from '../../pages/List'
 

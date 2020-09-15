@@ -1,4 +1,7 @@
 import React, { FormEvent, useState } from 'react';
+
+import {sweetAlert} from '../../utils/sweetAlert'
+
 import {useHistory} from 'react-router-dom'
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -21,11 +24,13 @@ const Form = () => {
         name,
         price: Number(price)
       }).then(() => {
-        alert('cadastrado com successo!')
         history.push('/')
+
+        sweetAlert('Cadastrado com sucesso.', 'success')
+        
       })
     } catch(err) {
-      alert(`erro ao cadastrar ${err.message}`)
+      sweetAlert('Não foi possivel cadastrar.', 'error')
     }
   }
 

@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+
+import {sweetAlert} from '../../utils/sweetAlert'
 import Thead from '../../components/Thead'
 import Tbody from '../../components/Tbody';
 
@@ -22,15 +24,17 @@ const List: React.FC = () => {
 
   async function handleRemoveProduc(id: number) {
     try {
-      const response = await api.delete(`products/${id}`)
+      await api.delete(`products/${id}`).then(() => {
 
-      if (response) {
         api.get('products').then(response => {
           setProducts(response.data)
         })
-      }
+
+        sweetAlert('Removido com sucesso.')
+        
+      })
     } catch(err) {
-      console.log(`error: ${err}`);
+      sweetAlert('Não foi possivel remover.', 'warning')
     }
   }
 

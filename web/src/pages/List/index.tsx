@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
+import Swal from 'sweetalert2'
+
 import {sweetAlert} from '../../utils/sweetAlert'
 import Thead from '../../components/Thead'
 import Tbody from '../../components/Tbody';
@@ -24,14 +26,23 @@ const List: React.FC = () => {
 
   async function handleRemoveProduc(id: number) {
     try {
-      await api.delete(`products/${id}`).then(() => {
-
-        api.get('products').then(response => {
-          setProducts(response.data)
-        })
-
-        sweetAlert('Removido com sucesso.')
-        
+      await Swal.fire({
+        title: 'Tem certeza que quer Deletar esse registro?',
+        text: "Você não poderá reverter essa ação!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Confirm!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          api.delete(`products/${id}`).then(() => {
+            api.get('products').then(response => {
+              setProducts(response.data)
+            })
+            sweetAlert('Removido com sucesso.')
+          })  
+        }
       })
     } catch(err) {
       sweetAlert('Não foi possivel remover.', 'warning')
